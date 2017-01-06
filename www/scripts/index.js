@@ -1,7 +1,7 @@
 ﻿
 
 
-    document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
+    document.addEventListener("deviceready", onDeviceReady, false);
 	//onDeviceReady();
 
     function onDeviceReady() {
