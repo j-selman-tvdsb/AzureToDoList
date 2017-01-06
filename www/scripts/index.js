@@ -5,7 +5,7 @@
 	//onDeviceReady();
 
     function onDeviceReady() {
-       
+       /*
             $.ajax({
                 url: "http://azurerestservice20170105011812.azurewebsites.net/api/ToDoItem"
             }).then(function (data) {
@@ -20,6 +20,9 @@
                 });
 
             });
+			*/
+			
+			alert("hello world");
         
     }
 
