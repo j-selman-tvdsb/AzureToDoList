@@ -28,10 +28,11 @@ body {
 	
     background-color:#32383d;
     font-family: 'RobotoRegular', 'Droid Sans', 'Segoe UI', Segoe, 'San Francisco', 'Helvetica Neue', Helvetica, Arial, Geneva, sans-serif;
-    font-size:18px;
+    font-size:25px;
 }
 
-input[type=checkbox] {width:20px; height:20px;}
+input[type=text] {font-size:25px}
+input[type=checkbox] {width:30px; height:30px;}
 
 .app {
     background: url(../images/cordova.png) no-repeat center top; 
