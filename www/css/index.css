@@ -4,7 +4,6 @@
 
 body {
     
-    background-color:#007FFF;
     color:white;
   
     background-attachment:fixed;
@@ -16,7 +15,8 @@ body {
     text-transform:uppercase;
     width:100%;
 	
-    background-color:#32383d;
+    
+    background-color:#007FFF;
     font-family: 'RobotoRegular', 'Droid Sans', 'Segoe UI', Segoe, 'San Francisco', 'Helvetica Neue', Helvetica, Arial, Geneva, sans-serif;
     font-size:25px;
 }
