@@ -1,11 +1,15 @@
 ﻿document.addEventListener("deviceready", onDeviceReady, false);
-	//onDeviceReady();
+//onDeviceReady();
+
+
+	
+
 	
 	
 
     function onDeviceReady() {
       
-    	 
+    	
 	   showToDoList();
 	 
 	        
@@ -20,9 +24,11 @@
       }).then(function(data) {
        
 	   $.each(data, function(index,item) {        
-			$("#ToDoItems").append("<input type='checkbox' class='chkbox' id='" + item.id + "' onchange='showID(this);'/>" + item.Text + "<br/>");
+			$("#ToDoItems").append("<div id='div" + item.id + "' class='divToDoItems'><input type='checkbox' class='chkbox' id='" + item.id + "' />" + item.Text + "<img src='images/deleteButton.gif' id='img" + item.id + "' class='imgDelete' style='visibility:hidden'></div>");
 					
 		});
+		
+		
 				       
     });
 		
@@ -78,6 +84,32 @@
         $.ajax({
             url: 'http://azurerestservice20170105011812.azurewebsites.net/api/ToDoItem',
             type: 'PUT',
+            data:JSON.stringify(toDoItem),            
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                
+				showToDoList();
+				
+				
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });
+    }
+	
+	
+	function deleteItem(id_num) {
+		
+		
+        jQuery.support.cors = true;
+        var toDoItem = {
+             id: id_num
+        };       
+        
+        $.ajax({
+            url: 'http://azurerestservice20170105011812.azurewebsites.net/api/ToDoItem',
+            type: 'DELETE',
             data:JSON.stringify(toDoItem),            
             contentType: "application/json;charset=utf-8",
             success: function (data) {

@@ -1,28 +1,67 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Hello jQuery</title>
+        <title>To Do App</title>
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
-		<script src="phonegap.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="scripts/index.js"></script>
+		
     </head>
 
     <body>
-			<br/>
-			<br/>
-		<h1>To Do Items</h1>
-		<div id='addItem'>
-		<table border='0' width='90%'><tr><td><input type = 'text' id = 'txtToDoItem'></td><td><button id= 'btnSubmit'>Add</button></td></tr></table>
-        <div id="ToDoItems">
-        		
-        </div>
+			<div data-role="page" id="pageone">
+					<div data-role="header">
+							<h1>To Do List</h1>
+					</div>
+
+			<div data-role="main" class="ui-content">
 		
-		<script>
-			$("#btnSubmit").click(addData);
+				<input type = 'text' id = 'txtToDoItem'>
+				<button id= 'btnSubmit'>Add</button>
+				<div id="ToDoItems"> </div>
+						<script>
+					
+						//Event Listeners Go Here
+						$("#btnSubmit").click(addData);
+						
+						
+						$("#ToDoItems").on("change",".chkbox",function(){
+								showID(this);
+						});
+						
+						$("#ToDoItems").on("swipeleft",".divToDoItems",function(){
+								
+								var img = "#" + this.id.replace('div','img');
+								$(img).css("visibility","visible");
+								
+						});
+						
+						$("#ToDoItems").on("swiperight",".divToDoItems",function(){
+								
+								var img = "#" + this.id.replace('div','img');
+								$(img).css("visibility","hidden");
+								
+						});
+						
+						$("#ToDoItems").on("click",".imgDelete",function(){
+								
+								deleteItem(this.id.substring(3));
+								
+						});
+						
+					</script>
 		
-		</script>
+		<div data-role="footer" data-position="fixed">
+			<h1>&nbsp;</h1>
+		</div>
+				
+			</div>
+		
+		
+		
 		
     </body>
 </html>
