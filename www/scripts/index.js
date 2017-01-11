@@ -41,6 +41,7 @@
 	
 	function addData() {
 		$("#txtToDoItem").prop('disabled',true);
+		$("#btnSubmit").prop('disabled',true);
 		
         jQuery.support.cors = true;
         var toDoItem = {
@@ -57,6 +58,7 @@
 				showToDoList();
 				$("#txtToDoItem").val('');
 				$("#txtToDoItem").prop('disabled',false);
+		    		$("#btnSubmit").prop('disabled',false);
             },
             error: function (x, y, z) {
                 alert(x + '\n' + y + '\n' + z);
