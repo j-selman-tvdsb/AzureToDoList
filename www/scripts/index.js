@@ -1,5 +1,5 @@
 ﻿document.addEventListener("init", onDeviceReady, false);
-//onDeviceReady();
+
 
 
 	function init() {
