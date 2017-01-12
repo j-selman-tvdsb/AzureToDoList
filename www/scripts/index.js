@@ -24,7 +24,7 @@
       }).then(function(data) {
        
 	   $.each(data, function(index,item) {        
-			$("#ToDoItems").append("<div id='div" + item.id + "' class='divToDoItems'><input type='checkbox' class='chkbox' id='" + item.id + "' />" + item.Text + "<img src='images/deleteButton.gif' id='img" + item.id + "' class='imgDelete' style='visibility:hidden'></div>");
+			$("#ToDoItems").append("<div id='div" + item.id + "' class='divToDoItems'><input type='checkbox' class='chkbox' id='" + item.id + "' />" + item.Text + "<img src='deletebutton (1).gif' id='img" + item.id + "' class='imgDelete' style='visibility:hidden'></div>");
 					
 		});
 		
