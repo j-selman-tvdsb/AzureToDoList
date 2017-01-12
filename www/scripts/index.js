@@ -5,11 +5,18 @@
 	function init() {
 
   //listen for changes
-  alert('i am here');
-  document.addEventListener("offline", onOffline, false);
-  document.addEventListener("online", onOnline, false);
+	  document.addEventListener("offline", onOffline, false);
+	  document.addEventListener("online", onOnline, false);
+	  var online = window.navigator.onLine;
+	   if ( online ) {
+		showToDoList();
+		}
+		else {
+			onOffline();
+		// internet data
+		}
 
-}
+	}
 
 		
 
