@@ -1,19 +1,18 @@
-﻿document.addEventListener("deviceready", onDeviceReady, false);
+﻿document.addEventListener("init", onDeviceReady, false);
 //onDeviceReady();
 
 
-	
+	function init() {
 
-	
-	
+  //listen for changes
+  document.addEventListener("offline", function(){alert('You are now offline');}, false);
+  document.addEventListener("online", showToDoList, false);
 
-    function onDeviceReady() {
-      
-    	
-	   showToDoList();
-	 
-	        
-    }
+}
+
+		
+
+    
 	
 	function showToDoList()
 	{
@@ -24,7 +23,7 @@
       }).then(function(data) {
        
 	   $.each(data, function(index,item) {        
-			$("#ToDoItems").append("<div id='div" + item.id + "' class='divToDoItems'><input type='checkbox' class='chkbox' id='" + item.id + "' />" + item.Text + "<img src='deletebutton (1).gif' id='img" + item.id + "' class='imgDelete' style='visibility:hidden'></div>");
+			$("#ToDoItems").append("<div id='div" + item.id + "' class='divToDoItems' data-theme='a' ><input type='checkbox' data-theme='a' class='chkbox' id='" + item.id + "' />" + item.Text + "<img src='deletebutton (1).gif' id='img" + item.id + "' class='imgDelete' style='visibility:hidden'></div>");
 					
 		});
 		
