@@ -5,8 +5,8 @@
 	function init() {
 
   //listen for changes
-  document.addEventListener("offline", function(){alert('You are now offline');}, false);
-  document.addEventListener("online", showToDoList, false);
+  document.addEventListener(function(){alert('You are now offline');},offline,  false);
+  document.addEventListener("showToDoList", online, false);
 
 }
 
