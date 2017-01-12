@@ -6,13 +6,22 @@
 
   //listen for changes
   alert('i am here');
-  document.addEventListener("offline", function(){alert('You are now offline');}, false);
-  document.addEventListener("online", showToDoList, false);
+  document.addEventListener("offline", onOffline, false);
+  document.addEventListener("online", onOnline, false);
 
 }
 
 		
 
+	function onOffline()
+	{
+		alert('you are offline.  please connect to data.');
+	}	
+	
+	function onOnline()
+	{
+		showToDoList();
+	}
     
 	
 	function showToDoList()
