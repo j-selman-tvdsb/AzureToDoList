@@ -1,10 +1,11 @@
-﻿document.addEventListener("init", init, false);
+﻿document.addEventListener("deviceready", init, false);
 //onDeviceReady();
 
 
 	function init() {
 
   //listen for changes
+  alert('i am here');
   document.addEventListener("offline", function(){alert('You are now offline');}, false);
   document.addEventListener("online", showToDoList, false);
 
