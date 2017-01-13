@@ -43,7 +43,7 @@
 	
 	function onOnline()
 	{
-		
+		online=true;
 		addOffLineData();   
 		
 	}
