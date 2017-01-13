@@ -29,7 +29,10 @@
 						<script>
 					
 						//Event Listeners Go Here
-						$("#btnSubmit").click(addData);
+						$("#btnSubmit").on("click", function(){
+								addData($("#txtToDoItem").val());
+						
+						});
 						
 						
 						$("#ToDoItems").on("change",".chkbox",function(){

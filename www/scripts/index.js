@@ -1,19 +1,27 @@
-﻿document.addEventListener("deviceready", init, false);
-//onDeviceReady();
-
+﻿//document.addEventListener("deviceready", init, false);
+	init();
+	var online;
+	
 
 	function init() {
 
   //listen for changes
 	  document.addEventListener("offline", onOffline, false);
 	  document.addEventListener("online", onOnline, false);
-	  var online = window.navigator.onLine;
+	  online = window.navigator.onLine;
+	  
+	  //debugging in chrome with online set to false
+	   online=true;
 	   if ( online ) {
-		showToDoList();
+		online=true
+		addOffLineData();   
+		
 		}
 		else {
+			
+			online=false;
 			onOffline();
-		// internet data
+		
 		}
 
 	}
@@ -22,14 +30,47 @@
 
 	function onOffline()
 	{
-		alert('you are offline.  please connect to data.');
+		
+		var db= openDatabase('OffLineDatabase', '1.0', 'Off Line Database', 2 * 1024 * 1024);
+
+		db.transaction(function (tx) {  
+			
+			tx.executeSql('CREATE TABLE IF NOT EXISTS todoitem(id,text,complete)');
+		});
+		
+		showOfflineData();
+		
 	}	
 	
 	function onOnline()
 	{
-		showToDoList();
+		
+		addOffLineData();   
+		
 	}
     
+	
+	function addOffLineData()
+	{
+		 var db= openDatabase('OffLineDatabase', '1.0', 'Off Line Database', 2 * 1024 * 1024);
+	   db.transaction(function (tx) {
+				tx.executeSql('SELECT * FROM todoitem', [], function (tx, results) {
+				var len = results.rows.length, i;
+      
+			  for (i = 0; i < len; i++){
+				 
+				 addData(results.rows.item(i).text);
+				 //now delete the row
+				 tx.executeSql('Delete FROM todoitem where text=?', [results.rows.item(i).text], null,function(tx,e){alert(e.message);});
+			  }
+
+      
+		});
+		
+		showToDoList();
+		
+		});
+	}
 	
 	function showToDoList()
 	{
@@ -47,6 +88,8 @@
 		
 				       
     });
+	
+	offline = false;
 		
 	}
 	
@@ -61,33 +104,71 @@
 	}
 
 	
-	function addData() {
-		$("#txtToDoItem").prop('disabled',true);
-		$("#btnSubmit").prop('disabled',true);
+	function addData(itemToAdd) {
 		
-        jQuery.support.cors = true;
-        var toDoItem = {
-             Text: $("#txtToDoItem").val()
-        };       
-        
-        $.ajax({
-            url: 'http://azurerestservice20170105011812.azurewebsites.net/api/ToDoItem',
-            type: 'POST',
-            data:JSON.stringify(toDoItem),            
-            contentType: "application/json;charset=utf-8",
-            success: function (data) {
-                alert(data);
-				showToDoList();
-				$("#txtToDoItem").val('');
-				$("#txtToDoItem").prop('disabled',false);
-		    		$("#btnSubmit").prop('disabled',false);
-            },
-            error: function (x, y, z) {
-                alert(x + '\n' + y + '\n' + z);
-            }
-        });
+		if(online)
+		{
+			//$("#txtToDoItem").prop('disabled',true);
+			//$("#btnSubmit").prop('disabled',true);
+			
+			jQuery.support.cors = true;
+			var toDoItem = {
+				 Text: itemToAdd
+			};       
+			
+			$.ajax({
+				url: 'http://azurerestservice20170105011812.azurewebsites.net/api/ToDoItem',
+				type: 'POST',
+				data:JSON.stringify(toDoItem),            
+				contentType: "application/json;charset=utf-8",
+				success: function (data) {
+					$("#txtToDoItem").val('');
+					$("#txtToDoItem").prop('disabled',false);
+					$("#btnSubmit").prop('disabled',false);
+					showToDoList();
+				},
+				error: function (x, y, z) {
+					alert(x + '\n' + y + '\n' + z);
+				}
+			});
+		}else
+		{
+			var db= openDatabase('OffLineDatabase', '1.0', 'Off Line Database', 2 * 1024 * 1024);
+			db.transaction(function (tx) {
+				
+				
+			    tx.executeSql("INSERT INTO todoitem (id, text, complete) VALUES (?,?,?)",['kgyguyyuguyf',$("#txtToDoItem").val(),0],function(){alert('data inserted to offline database');},function(tx,e){alert(e.message);});
+			  
+			});
+			
+			
+			
+			showOfflineData();
+		}
     }
 	
+	function showOfflineData()
+	{
+	   
+	  $("#ToDoItems").html("");
+	  
+	   var db= openDatabase('OffLineDatabase', '1.0', 'Off Line Database', 2 * 1024 * 1024);
+	   db.transaction(function (tx) {
+				tx.executeSql('SELECT * FROM todoitem', [], function (tx, results) {
+				var len = results.rows.length, i;
+      
+	  $("#ToDoItems").append("The following items have been added in offline mode<ol>");
+      for (i = 0; i < len; i++){
+         
+		 $("#ToDoItems").append("<li>" + results.rows.item(i).text + "</li>")
+			
+
+      }}, null);
+	});
+	
+	$("#ToDoItems").append("</ol>");
+		
+	}
 	
 	function markAsCompleted(id_num) {
 		
