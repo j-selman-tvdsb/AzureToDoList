@@ -63,11 +63,12 @@
 				 //now delete the row
 				 tx.executeSql('Delete FROM todoitem where text=?', [results.rows.item(i).text], null,function(tx,e){alert(e.message);});
 			  }
+			  showToDoList();
 
       
 		});
 		
-		showToDoList();
+	
 		
 		});
 	}
