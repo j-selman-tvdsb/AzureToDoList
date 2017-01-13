@@ -1,5 +1,5 @@
-﻿//document.addEventListener("deviceready", init, false);
-	init();
+﻿document.addEventListener("deviceready", init, false);
+	//init();
 	var online;
 	
 
@@ -9,9 +9,7 @@
 	  document.addEventListener("offline", onOffline, false);
 	  document.addEventListener("online", onOnline, false);
 	  online = window.navigator.onLine;
-	  
-	  //debugging in chrome with online set to false
-	   online=true;
+	  	  
 	   if ( online ) {
 		online=true
 		addOffLineData();   
