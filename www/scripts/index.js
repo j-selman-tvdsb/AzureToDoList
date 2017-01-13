@@ -63,7 +63,7 @@
 				 //now delete the row
 				 tx.executeSql('Delete FROM todoitem where text=?', [results.rows.item(i).text], null,function(tx,e){alert(e.message);});
 			  }
-			  showToDoList();
+			 
 
       
 		});
@@ -126,7 +126,7 @@
 					$("#txtToDoItem").val('');
 					$("#txtToDoItem").prop('disabled',false);
 					$("#btnSubmit").prop('disabled',false);
-					
+					showToDoList();
 				},
 				error: function (x, y, z) {
 					alert('I might be here instead');
