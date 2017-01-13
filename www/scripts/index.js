@@ -59,7 +59,7 @@
       
 			  for (i = 0; i < len; i++){
 				 
-				 addData(results.rows.item(i).text);
+				 addData2(results.rows.item(i).text);
 				 //now delete the row
 				 tx.executeSql('Delete FROM todoitem where text=?', [results.rows.item(i).text], null,function(tx,e){alert(e.message);});
 			  }
