@@ -127,7 +127,7 @@
 					showToDoList();
 				},
 				error: function (x, y, z) {
-					alert(x + '\n' + y + '\n' + z);
+					alert('I might be here instead');
 				}
 			});
 		}else
@@ -136,7 +136,7 @@
 			db.transaction(function (tx) {
 				
 				
-			    tx.executeSql("INSERT INTO todoitem (id, text, complete) VALUES (?,?,?)",['kgyguyyuguyf',$("#txtToDoItem").val(),0],function(){alert('data inserted to offline database');},function(tx,e){alert(e.message);});
+			    tx.executeSql("INSERT INTO todoitem (id, text, complete) VALUES (?,?,?)",['kgyguyyuguyf',$("#txtToDoItem").val(),0],function(){alert('data inserted to offline database');},function(tx,e){alert('should be here');});
 			  
 			});
 			
