@@ -28,6 +28,7 @@
 
 	function onOffline()
 	{
+		online=false;
 		
 		var db= openDatabase('OffLineDatabase', '1.0', 'Off Line Database', 2 * 1024 * 1024);
 
@@ -106,8 +107,8 @@
 		
 		if(online)
 		{
-			//$("#txtToDoItem").prop('disabled',true);
-			//$("#btnSubmit").prop('disabled',true);
+			$("#txtToDoItem").prop('disabled',true);
+			$("#btnSubmit").prop('disabled',true);
 			
 			jQuery.support.cors = true;
 			var toDoItem = {
