@@ -126,7 +126,7 @@
 					$("#txtToDoItem").val('');
 					$("#txtToDoItem").prop('disabled',false);
 					$("#btnSubmit").prop('disabled',false);
-					showToDoList();
+					
 				},
 				error: function (x, y, z) {
 					alert('I might be here instead');
