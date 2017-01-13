@@ -43,6 +43,7 @@
 	
 	function onOnline()
 	{
+		alert('now online');
 		online=true;
 		addOffLineData();   
 		
@@ -136,13 +137,20 @@
 			db.transaction(function (tx) {
 				
 				
-			    tx.executeSql("INSERT INTO todoitem (id, text, complete) VALUES (?,?,?)",['kgyguyyuguyf',$("#txtToDoItem").val(),0],function(){alert('data inserted to offline database');},function(tx,e){alert('should be here');});
+			    tx.executeSql("INSERT INTO todoitem (id, text, complete) VALUES (?,?,?)",['kgyguyyuguyf',$("#txtToDoItem").val(),0],function(){
+					
+					$("#txtToDoItem").val('');
+					$("#txtToDoItem").prop('disabled',false);
+					$("#btnSubmit").prop('disabled',false);
+					showOfflineData();
+					
+				},function(tx,e){alert('should be here');});
 			  
 			});
 			
 			
 			
-			showOfflineData();
+			
 		}
     }
 	
